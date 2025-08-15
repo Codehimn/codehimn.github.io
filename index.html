@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alquiler · Viviendas del Sur</title>
+  <meta name="description"
+    content="Apartamento en alquiler en Viviendas del Sur (Itagüí). Mira el video, revisa el mapa y contáctame por WhatsApp." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preconnect" href="https://www.youtube.com" />
+  <link rel="preconnect" href="https://i.ytimg.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: #0b1220;
+      background: #0f172a;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    :root {
+      --bg: #0f172a;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.16);
+      --text: #e5e7eb;
+      --muted: #cbd5e1;
+      --accent: #22d3ee;
+      --accent-2: #38bdf8;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .bg-grad {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(60vmax 60vmax at 20% 10%, rgba(56, 189, 248, 0.18), transparent 60%),
+        radial-gradient(60vmax 60vmax at 80% 20%, rgba(34, 211, 238, 0.18), transparent 60%),
+        radial-gradient(60vmax 60vmax at 50% 90%, rgba(99, 102, 241, 0.16), transparent 60%);
+      filter: blur(2px);
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding-top: clamp(24px, 4vw, 48px);
+      color: var(--text);
+    }
+
+    .brand .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #001018;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 999px;
+      letter-spacing: .3px;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin: 10px 0 4px;
+      font-size: clamp(28px, 5vw, 44px);
+      color: white;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: clamp(16px, 3vw, 28px);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: clamp(16px, 3vw, 32px);
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .intro h2 {
+      margin: 0 0 8px;
+      font-size: clamp(22px, 3.6vw, 28px);
+      color: white;
+    }
+
+    .intro p {
+      color: var(--muted);
+      margin-top: 0;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #031a22;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .12s ease, box-shadow .2s ease;
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35);
+    }
+
+    .cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(56, 189, 248, 0.45);
+    }
+
+    .cta .icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .cta-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--accent-2);
+      box-shadow: none;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: clamp(20px, 3.2vw, 26px);
+      color: white;
+    }
+
+    .video-wrap {
+      width: 100%;
+      display: grid;
+      place-items: center;
+    }
+
+    .video {
+      width: min(420px, 100%);
+      aspect-ratio: 9/16;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .details {
+      margin-top: 22px;
+    }
+
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 14px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .features li {
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+    }
+
+    .map-card {
+      margin-top: 22px;
+    }
+
+    .map {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .footer {
+      color: var(--muted);
+      text-align: center;
+      padding-bottom: 36px;
+    }
+
+    .float-wa {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #031a22;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-weight: 800;
+      box-shadow: 0 14px 40px rgba(56, 189, 248, .5);
+    }
+
+    .float-wa .icon {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-grad"></div>
+  <a class="float-wa" target="_blank" rel="noopener"
+    href="https://api.whatsapp.com/send/?phone=573114982807&text=Hola,%20estoy%20interesad@%20en%20el%20piso%20en%20Viviendas%20del%20Sur.%20%C2%BFPodr%C3%ADa%20darme%20m%C3%A1s%20informaci%C3%B3n?&type=phone_number"
+    aria-label="Abrir WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.149-.198.297-.769.966-.943 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.607.134-.133.297-.347.446-.52.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.074-.149-.672-1.616-.92-2.215-.243-.584-.489-.505-.672-.514l-.573-.01c-.198 0-.521.074-.793.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.693.626.711.226 1.358.194 1.87.118.571-.085 1.758-.718 2.006-1.41.248-.694.248-1.289.173-1.41-.074-.124-.272-.198-.57-.347zM20.52 3.48C18.192 1.153 15.21 0 12 0 5.373 0 0 5.373 0 12c0 2.116.553 4.17 1.604 5.98L0 24l6.187-1.594C7.985 23.447 10.018 24 12 24c6.627 0 12-5.373 12-12 0-3.21-1.153-6.192-3.48-8.52zM12 22.093c-1.798 0-3.553-.48-5.085-1.387l-.365-.216-3.673.946.981-3.58-.238-.369C2.58 15.84 2.228 13.94 2.228 12c0-5.388 4.384-9.772 9.772-9.772 2.612 0 5.066 1.017 6.91 2.86s2.86 4.297 2.86 6.91c0 5.387-4.384 9.772-9.772 9.772z" />
+    </svg>
+    WhatsApp
+  </a>
+
+  <header class="container header">
+    <div class="brand">
+      <span class="badge">Disponible</span>
+      <h1>Alquiler de Apartamento</h1>
+      <p class="subtitle">Viviendas del Sur · Itagüí</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card grid">
+      <div class="intro">
+        <h2>Conócelo en 30&nbsp;segundos</h2>
+        <p>Mira el video, ubícate en el mapa y escríbeme por WhatsApp. 📲</p>
+        <a class="cta" target="_blank" rel="noopener"
+          href="https://api.whatsapp.com/send/?phone=573114982807&text=Hola,%20estoy%20interesad@%20en%20el%20piso%20en%20Viviendas%20del%20Sur.%20%C2%BFPodr%C3%ADa%20darme%20m%C3%A1s%20informaci%C3%B3n?&type=phone_number">
+          Solicitar información por WhatsApp
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.149-.198.297-.769.966-.943 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.607.134-.133.297-.347.446-.52.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.074-.149-.672-1.616-.92-2.215-.243-.584-.489-.505-.672-.514l-.573-.01c-.198 0-.521.074-.793.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.693.626.711.226 1.358.194 1.87.118.571-.085 1.758-.718 2.006-1.41.248-.694.248-1.289.173-1.41-.074-.124-.272-.198-.57-.347z" />
+          </svg>
+        </a>
+        <br />
+        <br />
+
+
+        <section class="map-card card" style="max-width: 500px; margin: 0 auto;">
+          <h3 class="section-title">Ubicación en el mapa</h3>
+          <div class="map"
+            style="aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+            <iframe title="Mapa - Viviendas del Sur"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.6662585346744!2d-75.6028802!3d6.1719461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e46825d7b2a29ff%3A0xb87ff7bfdfef2a55!2sCl.%2084A%20%2356-22%2C%20Itag%C3%BCi%2C%20Antioquia!5e0!3m2!1ses!2sco!4v1691799000000!5m2!1ses!2sco"
+              width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <p class="subtitle" style="margin-top:10px; text-align:center;">
+            Dirección: Cl. 84A #56-22, Vivendas del Sur, Itagüí
+            — <a href="https://www.google.com/maps/place/Cl.+84A+%2356-22,+Vivendas+del+Sur,+Itag%C3%BCi,+Antioquia/"
+              target="_blank" rel="noopener" style="color:#38bdf8; text-decoration:underline;">
+              Abrir en Google Maps
+            </a>
+          </p>
+        </section>
+
+      </div>
+      <div class="video-wrap">
+        <div class="video">
+          <iframe title="Video del Apartamento" src="https://www.youtube.com/embed/9MOdZNegc2A"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="details card">
+      <h3 class="section-title">Detalles rápidos</h3>
+      <ul class="features">
+        <li>📍 Zona: Viviendas del Sur (Itagüí)</li>
+        <li>🛏️ Ideal para 1–3 personas</li>
+        <li>💬 Respuesta rápida por WhatsApp</li>
+      </ul>
+      <a class="cta cta-secondary" target="_blank" rel="noopener"
+        href="https://api.whatsapp.com/send/?phone=573114982807&text=Hola,%20estoy%20interesad@%20en%20el%20piso%20en%20Viviendas%20del%20Sur.%20%C2%BFPodr%C3%ADa%20darme%20m%C3%A1s%20informaci%C3%B3n?&type=phone_number">Quiero
+        más información</a>
+    </section>
+
+
+
+  </main>
+
+  <footer class="container footer">
+    <small>© <span id="y"></span> Alquiler Viviendas del Sur · Hecho con ❤️</small>
+  </footer>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>

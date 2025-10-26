@@ -74,8 +74,7 @@
   <main class="wrap">
     <section class="hero">
       <figure class="card">
-        <!-- Usa la imagen de ArtemenTe. Asegúrate de que el archivo se llame 'artemente-rifa.png' o ajusta el nombre. -->
-        <img class="hero-img" src="artemente-rifa.png" alt="Kit Creativo ArtemenTe en rifa" />
+        <img class="hero-img" src="artemente-rifa.jpg" alt="Kit Creativo ArtemenTe en rifa" />
       </figure>
 
       <div class="grid-card card">
@@ -109,12 +108,9 @@
     const WHATS_MSG = encodeURIComponent(
       "Hola 👋, quiero participar en la *Rifa ArtemenTe: Conecta con tu Energía Creativa*. ¿Qué números tienes disponibles?"
     );
-    // Lista de números DISPONIBLES. Todo lo que NO esté en esta lista se marcará como RESERVADO.
-    const disponibles = [
-      3,6,7,10,11,12,14,15,21,23,24,26,30,31,33,34,35,36,40,41,42,43,44,46,47,49,
-      50,51,53,54,55,56,58,59,60,61,62,64,65,66,68,69,70,71,72,74,75,76,78,79,80,
-      81,83,84,85,86,88,90,91,92,93,94,96
-    ].map(n => (""+n).padStart(2,"0"));
+    // ID de tu Google Sheet (asegúrate de que sea público o que la API de Google Sheets tenga permisos)
+    const SHEET_ID = "1GxjtQxIKo0Z4YMQr09dNTQRIXET-iCT-IlEldU6cXsw";
+    let disponibles = [];
     // ==========================================================
 
     const board = document.getElementById('board');
@@ -129,10 +125,32 @@
     // Generar números 00..99
     const numbers = Array.from({length:100}, (_,i)=> (""+i).padStart(2,'0'));
 
+    async function cargarDisponibles() {
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&tq=select%20*`;
+        const res = await fetch(url, { cache: "no-store" });
+        const txt = await res.text();
+        const json = JSON.parse(txt.substring(txt.indexOf("{"), txt.lastIndexOf("}") + 1));
+        const rows = json.table.rows;
+
+        disponibles = rows
+          .map(r => r.c?.[0]?.v) // Asume que los números están en la primera columna (índice 0)
+          .filter(v => v !== null && v !== undefined && v !== "" && String(v).toLowerCase() !== "numero") // Filtra celdas vacías o el encabezado "numero"
+          .map(v => String(v).padStart(2, "0")); // Formatea a dos dígitos (ej. 7 -> "07")
+        console.log("Números disponibles cargados:", disponibles);
+      } catch (e) {
+        console.error("No se pudo cargar el Sheet:", e);
+        // Si hay un error, se inicializa disponibles como un array vacío o un valor por defecto
+        disponibles = [];
+        alert("¡Error al cargar los números de la rifa! Intenta de nuevo más tarde.");
+      }
+      render(); // Llama a render una vez que los datos se han cargado (o fallado)
+    }
+
     function render(){
       board.innerHTML = '';
       numbers.forEach(num => {
-        // Por defecto: reservado, salvo que esté en 'disponibles'
+        // Por defecto: reservado, salvo que esté en 'disponibles' (cargado del Sheet)
         const defaultSold = !disponibles.includes(num);
         const sold = state[num] !== undefined ? state[num] : defaultSold;
         const cell = document.createElement('button');
@@ -142,9 +160,14 @@
         cell.dataset.num = num;
         cell.innerHTML = `<div>${num}</div>`;
         cell.addEventListener('click', () => {
-          state[num] = !cell.classList.contains('sold');
-          save();
-          render();
+          // Solo permite marcar/desmarcar si el número no es originalmente "vendido" por el Sheet
+          if (disponibles.includes(num)) { // Solo se puede modificar si el número está en la lista de disponibles del sheet
+            state[num] = !cell.classList.contains('sold');
+            save();
+            render();
+          } else {
+            alert("Este número ya está reservado o no está disponible.");
+          }
         });
         board.appendChild(cell);
       });
@@ -152,20 +175,37 @@
 
     // Botones
     document.getElementById('btnWhats').onclick = () => {
-      const url = `https://api.whatsapp.com/send?phone=${WHATS_NUMBER}&text=${WHATS_MSG}`;
+      // Prepara una lista de los números seleccionados localmente
+      const seleccionados = numbers.filter(num => state[num] === false && disponibles.includes(num)); // Los que el usuario marcó como "disponibles" y que originalmente sí lo estaban
+
+      let whatsMessage;
+      if (seleccionados.length > 0) {
+        whatsMessage = encodeURIComponent(
+          `Hola 👋, estoy interesado en reservar los siguientes números para la *Rifa ArtemenTe*: ${seleccionados.join(', ')}. ¿Están disponibles?`
+        );
+      } else {
+        whatsMessage = WHATS_MSG; // Mensaje general si no ha seleccionado nada
+      }
+
+      const url = `https://api.whatsapp.com/send?phone=${WHATS_NUMBER}&text=${whatsMessage}`;
       window.open(url, '_blank');
     };
 
     document.getElementById('btnInvert').onclick = () => {
-      numbers.forEach(n => state[n] = !(state[n] ?? (!disponibles.includes(n))));
+      // Al invertir, solo afecta los números que originalmente están en la lista de disponibles
+      numbers.forEach(n => {
+        if (disponibles.includes(n)) {
+          state[n] = !(state[n] ?? (!disponibles.includes(n)));
+        }
+      });
       save(); render();
     };
 
     document.getElementById('btnReset').onclick = () => {
-      if(confirm('¿Restablecer el tablero al listado original (disponibles vs. reservados)?')){
+      if(confirm('¿Restablecer el tablero al listado original (disponibles vs. reservados según la hoja de cálculo)?')){
         localStorage.removeItem('rifa-artemente-estado');
-        for (const k in state) delete state[k];
-        render();
+        for (const k in state) delete state[k]; // Limpia el estado local
+        render(); // Vuelve a renderizar con la data del Sheet
       }
     };
 
@@ -179,7 +219,8 @@
       winBox.textContent = `¡Felicidades! El número ganador es: ${bn}. Este aviso permanecerá visible durante una semana.`;
     }
 
-    render();
+    // Inicia la carga de datos del Sheet
+    cargarDisponibles();
   </script>
 </body>
 </html>

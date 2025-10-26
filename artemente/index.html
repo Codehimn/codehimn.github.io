@@ -5,61 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>¡Rifa Artemente: Conecta con tu Energía Creativa!</title>
   <meta name="description" content="Rifa de un Kit Creativo-Consciente (camiseta, tula y sesión de yoga). Participa: juega el 7 de noviembre de 2025 con las 2 últimas cifras de la Lotería de Medellín. Publicaremos el número ganador aquí." />
-  <style>
-    :root{
-      /* Colores inspirados en la paleta de Artemente y energía creativa */
-      --bg: #f5f0fb; /* Fondo suave y claro */
-      --card: #ffffff; /* Fondo de tarjeta blanco */
-      --ink: #333333; /* Texto principal oscuro */
-      --brand: #6a0572; /* Morado vibrante de Artemente */
-      --muted: #8e44ad; /* Tono morado más suave para texto secundario */
-      --ok: #27ae60; /* Verde para acciones positivas (WhatsApp) */
-      --warn: #e74c3c; /* Rojo para acciones de advertencia (restablecer) */
-      --accent: #e0b0ff; /* Morado claro para acentos */
-      --text-highlight: #4a005a; /* Morado oscuro para texto importante */
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink)}
-    header{background:linear-gradient(180deg, #ffffff, #ffffff00);position:sticky;top:0;z-index:10;border-bottom:1px solid #eee}
-    .wrap{max-width:1000px;margin:auto;padding:20px}
-    .hero{display:grid;grid-template-columns:1fr;gap:16px;align-items:center}
-    .title{font-size:clamp(28px,5vw,48px);font-weight:800;color:var(--brand);letter-spacing:.4px}
-    .tag{display:inline-block;background:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;color:var(--text-highlight);}
-    .sub{color:var(--muted)}
-    .card{background:var(--card);border:1px solid #eee;border-radius:18px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
-    .grid-card{padding:16px}
-    .info{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-    .info b{color:var(--text-highlight)}
-    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
-    .btn{border:none;cursor:pointer;padding:10px 14px;border-radius:12px;font-weight:700}
-    .btn.primary{background:var(--brand);color:#fff}
-    .btn.ghost{background:#0000;border:1px solid var(--muted);color:var(--ink)}
-    .btn.ok{background:var(--ok);color:#fff}
-    .btn.warn{background:var(--warn);color:#fff}
-
-    .board{--cols:10;display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:8px;margin-top:16px}
-    .cell{position:relative;aspect-ratio:1;display:grid;place-items:center;border:1px solid #e5e5e5;border-radius:12px;background:#fff;font-weight:700;font-size:clamp(12px,2.8vw,18px);cursor:pointer;transition:.15s transform,.15s box-shadow}
-    .cell:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.06)}
-    .cell small{position:absolute;bottom:6px;right:8px;color:#aaa;font-weight:600;font-size:.75em}
-    .cell.sold{color:#9b9b9b;opacity:.9}
-    .cell.sold::after{content:"✨";position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(20px,4.8vw,30px)} /* Icono de brillo o estrella */
-    .legend{display:flex;gap:14px;align-items:center;color:#666;font-size:14px}
-    .dot{width:16px;height:16px;border-radius:6px;border:1px solid #ddd;background:#fff}
-    .dot.sold{background:#f4f4f4;display:grid;place-items:center}
-    .dot.sold::after{content:"✨";font-size:12px} /* Icono de brillo o estrella para leyenda */
-
-    figure{margin:0;border-radius:18px;overflow:hidden}
-    img.hero-img{width:100%;height:auto;display:block}
-
-    footer{padding:30px 20px;color:#666;text-align:center}
-    .note{font-size:14px;color:var(--muted)}
-    .winning-banner{margin-top:10px;padding:10px 14px;border-radius:12px;background:var(--accent);border:1px dashed var(--brand);color:var(--text-highlight)}
-
-    @media (min-width:880px){
-      .hero{grid-template-columns:1.15fr .85fr}
-      .grid-card{padding:20px}
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
@@ -80,15 +27,18 @@
       <div class="grid-card card">
         <h1 class="title">Gánate este Kit Creativo-Consciente Artemente</h1>
         <p class="sub">El ganador se llevará: <b>camiseta, tula y sesión de yoga con meditación antiestrés</b>. ¡Pocos cupos disponibles y mucha suerte! <b>Valor del número: $10.000</b></p>
+        
         <div class="legend" aria-hidden="true">
-          <span class="dot"></span> Disponible
-          <span class="dot sold"></span> Reservado
+          <div class="legend-item"><span class="dot"></span> Disponible</div>
+          <div class="legend-item"><span class="dot selected"></span> Seleccionado</div>
+          <div class="legend-item"><span class="dot sold"></span> Reservado</div>
         </div>
+
         <div id="board" class="board" role="grid" aria-label="Cuadrícula de la rifa (00 a 99)"></div>
+        
         <div class="cta">
-          <button id="btnWhats" class="btn ok">📲 Preguntar / Apartar por WhatsApp</button>
-          <button id="btnInvert" class="btn ghost" title="Invierte selección">Invertir selección</button>
-          <button id="btnReset" class="btn warn" title="Limpia todo">Restablecer</button>
+          <button id="btnWhats" class="btn ok">📲 Enviar Selección por WhatsApp</button>
+          <button id="btnResetSelection" class="btn ghost" title="Limpiar números seleccionados">Limpiar Selección</button>
         </div>
         <p class="note">Publicaremos aquí el <b>número ganador</b> durante una semana después del sorteo. ✔️</p>
         <div id="winning" class="winning-banner" hidden></div>
@@ -102,30 +52,34 @@
 
   <script>
     // ================== CONFIGURACIÓN RÁPIDA ==================
-    // Reemplaza por tu número de WhatsApp (con indicativo de país):
-    const WHATS_NUMBER = "573127302963"; // Ejemplo, ajusta si es diferente
-    // Mensaje predeterminado para WhatsApp
-    const WHATS_MSG = encodeURIComponent(
-      "Hola 👋, quiero participar en la *Rifa Artemente*: Conecta con tu Energía Creativa. ¿Qué números tienes disponibles?"
-    );
-    // ID de tu Google Sheet (asegúrate de que sea público o que la API de Google Sheets tenga permisos)
-    const SHEET_ID = "1GxjtQxIKo0Z4YMQr09dNTQRIXET-iCT-IlEldU6cXsw";
-    let disponibles = [];
+    const WHATS_NUMBER = "573127302963"; // Reemplaza por tu número de WhatsApp (con indicativo de país)
+    const SHEET_ID = "1GxjtQxIKo0Z4YMQr09dNTQRIXET-iCT-IlEldU6cXsw"; // ID de tu Google Sheet
     // ==========================================================
 
     const board = document.getElementById('board');
+    const btnWhats = document.getElementById('btnWhats');
+    const btnResetSelection = document.getElementById('btnResetSelection');
 
-    // Carga/guarda estado local
-    const save = () => localStorage.setItem('rifa-artemente-estado', JSON.stringify(state));
-    const saved = localStorage.getItem('rifa-artemente-estado');
+    let availableNumbers = []; // Números disponibles según el Google Sheet
+    let selectedNumbers = new Set(); // Números que el usuario ha seleccionado en la UI
 
-    // Estado: map número -> sold(true/false)
-    const state = saved ? JSON.parse(saved) : {};
+    // Cargar estado de la selección del usuario desde localStorage
+    const loadSelectedState = () => {
+      const saved = localStorage.getItem('rifa-artemente-selected');
+      if (saved) {
+        selectedNumbers = new Set(JSON.parse(saved));
+      }
+    };
+
+    // Guardar estado de la selección del usuario en localStorage
+    const saveSelectedState = () => {
+      localStorage.setItem('rifa-artemente-selected', JSON.stringify(Array.from(selectedNumbers)));
+    };
 
     // Generar números 00..99
-    const numbers = Array.from({length:100}, (_,i)=> (""+i).padStart(2,'0'));
+    const allNumbers = Array.from({length:100}, (_,i)=> (""+i).padStart(2,'0'));
 
-    async function cargarDisponibles() {
+    async function loadAvailableNumbers() {
       try {
         const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&tq=select%20*`;
         const res = await fetch(url, { cache: "no-store" });
@@ -133,94 +87,117 @@
         const json = JSON.parse(txt.substring(txt.indexOf("{"), txt.lastIndexOf("}") + 1));
         const rows = json.table.rows;
 
-        disponibles = rows
-          .map(r => r.c?.[0]?.v) // Asume que los números están en la primera columna (índice 0)
-          .filter(v => v !== null && v !== undefined && v !== "" && String(v).toLowerCase() !== "numero") // Filtra celdas vacías o el encabezado "numero"
-          .map(v => String(v).padStart(2, "0")); // Formatea a dos dígitos (ej. 7 -> "07")
-        console.log("Números disponibles cargados:", disponibles);
+        availableNumbers = rows
+          .map(r => r.c?.[0]?.v)
+          .filter(v => v !== null && v !== undefined && v !== "" && String(v).toLowerCase() !== "numero")
+          .map(v => String(v).padStart(2, "0"));
+        console.log("Números disponibles cargados:", availableNumbers);
       } catch (e) {
         console.error("No se pudo cargar el Sheet:", e);
-        // Si hay un error, se inicializa disponibles como un array vacío o un valor por defecto
-        disponibles = [];
-        alert("¡Error al cargar los números de la rifa! Intenta de nuevo más tarde.");
+        availableNumbers = []; // Si hay un error, se inicializa como vacío
+        alert("¡Error al cargar los números de la rifa! Intenta de nuevo más tarde o contacta al organizador.");
       }
-      render(); // Llama a render una vez que los datos se han cargado (o fallado)
+      renderBoard(); // Renderiza el tablero una vez que los datos se han cargado
     }
 
-    function render(){
+    function renderBoard(){
       board.innerHTML = '';
-      numbers.forEach(num => {
-        // Por defecto: reservado, salvo que esté en 'disponibles' (cargado del Sheet)
-        const defaultSold = !disponibles.includes(num);
-        const sold = state[num] !== undefined ? state[num] : defaultSold;
+      allNumbers.forEach(num => {
+        const isAvailableInSheet = availableNumbers.includes(num);
+        const isSelectedByUser = selectedNumbers.has(num);
+
         const cell = document.createElement('button');
-        cell.className = 'cell' + (sold ? ' sold' : '');
+        cell.className = 'cell';
         cell.setAttribute('role','gridcell');
-        cell.setAttribute('aria-pressed', sold ? 'true' : 'false');
         cell.dataset.num = num;
         cell.innerHTML = `<div>${num}</div>`;
+
+        if (!isAvailableInSheet) {
+          cell.classList.add('sold');
+          cell.setAttribute('aria-label', `Número ${num} reservado`);
+          cell.disabled = true; // Deshabilita los números ya vendidos
+        } else if (isSelectedByUser) {
+          cell.classList.add('selected');
+          cell.setAttribute('aria-pressed', 'true');
+          cell.setAttribute('aria-label', `Número ${num} seleccionado`);
+        } else {
+          cell.setAttribute('aria-pressed', 'false');
+          cell.setAttribute('aria-label', `Número ${num} disponible para seleccionar`);
+        }
+        
         cell.addEventListener('click', () => {
-          // Solo permite marcar/desmarcar si el número no es originalmente "vendido" por el Sheet
-          if (disponibles.includes(num)) { // Solo se puede modificar si el número está en la lista de disponibles del sheet
-            state[num] = !cell.classList.contains('sold');
-            save();
-            render();
-          } else {
-            alert("Este número ya está reservado o no está disponible.");
+          if (isAvailableInSheet) { // Solo permite seleccionar si el número está disponible en el Sheet
+            if (selectedNumbers.has(num)) {
+              selectedNumbers.delete(num);
+              cell.classList.remove('selected');
+              cell.setAttribute('aria-pressed', 'false');
+            } else {
+              selectedNumbers.add(num);
+              cell.classList.add('selected');
+              cell.setAttribute('aria-pressed', 'true');
+            }
+            saveSelectedState();
+            updateWhatsAppButton(); // Actualiza el botón de WhatsApp
           }
         });
         board.appendChild(cell);
       });
+      updateWhatsAppButton();
     }
 
-    // Botones
-    document.getElementById('btnWhats').onclick = () => {
-      // Prepara una lista de los números seleccionados localmente
-      const seleccionados = numbers.filter(num => state[num] === false && disponibles.includes(num)); // Los que el usuario marcó como "disponibles" y que originalmente sí lo estaban
+    // Actualizar el estado del botón de WhatsApp
+    function updateWhatsAppButton() {
+      if (selectedNumbers.size > 0) {
+        btnWhats.textContent = `📲 Reservar ${selectedNumbers.size} Número(s)`;
+        btnWhats.classList.add('ok');
+        btnWhats.classList.remove('primary');
+      } else {
+        btnWhats.textContent = `💬 Consultar Disponibilidad`;
+        btnWhats.classList.remove('ok');
+        btnWhats.classList.add('primary'); // Estilo diferente si no hay selección
+      }
+    }
 
+    // Evento del botón de WhatsApp
+    btnWhats.onclick = () => {
       let whatsMessage;
-      if (seleccionados.length > 0) {
+      if (selectedNumbers.size > 0) {
+        const sortedSelected = Array.from(selectedNumbers).sort(); // Ordenar números seleccionados
         whatsMessage = encodeURIComponent(
-          `Hola 👋, estoy interesado en reservar los siguientes números para la *Rifa Artemente*: ${seleccionados.join(', ')}. ¿Están disponibles?`
+          `Hola 👋, estoy interesado en reservar los siguientes números para la *Rifa Artemente*: ${sortedSelected.join(', ')}. ¿Están disponibles para comprarlos?`
         );
       } else {
-        whatsMessage = WHATS_MSG; // Mensaje general si no ha seleccionado nada
+        whatsMessage = encodeURIComponent(
+          "Hola 👋, quiero participar en la *Rifa Artemente*: Conecta con tu Energía Creativa. ¿Qué números tienes disponibles?"
+        );
       }
-
       const url = `https://api.whatsapp.com/send?phone=${WHATS_NUMBER}&text=${whatsMessage}`;
       window.open(url, '_blank');
     };
 
-    document.getElementById('btnInvert').onclick = () => {
-      // Al invertir, solo afecta los números que originalmente están en la lista de disponibles
-      numbers.forEach(n => {
-        if (disponibles.includes(n)) {
-          state[n] = !(state[n] ?? (!disponibles.includes(n)));
-        }
-      });
-      save(); render();
-    };
-
-    document.getElementById('btnReset').onclick = () => {
-      if(confirm('¿Desea restablecer el tablero al listado original (disponibles vs. reservados según la hoja de cálculo)?')){
-        localStorage.removeItem('rifa-artemente-estado');
-        for (const k in state) delete state[k]; // Limpia el estado local
-        render(); // Vuelve a renderizar con la data del Sheet
+    // Botón para limpiar la selección
+    btnResetSelection.onclick = () => {
+      if(confirm('¿Desea limpiar su selección actual de números?')){
+        selectedNumbers.clear();
+        saveSelectedState();
+        renderBoard(); // Volver a renderizar para reflejar el cambio
       }
     };
 
     // Mostrar ganador (si se pasa en el hash #ganador=NN)
     const params = new URLSearchParams(location.hash.slice(1));
-    const ganador = params.get('ganador');
-    if(ganador){
-      const bn = ganador.padStart(2,'0');
+    const winnerNumber = params.get('ganador');
+    if(winnerNumber){
+      const formattedWinner = winnerNumber.padStart(2,'0');
       const winBox = document.getElementById('winning');
       winBox.hidden = false;
-      winBox.textContent = `¡Felicidades! El número ganador es: ${bn}. Este aviso permanecerá visible durante una semana.`;
+      winBox.innerHTML = `🎉 ¡Felicidades! El número ganador es: <b>${formattedWinner}</b>. <br>¡Gracias por participar!`;
     }
 
-    // Inicia la carga de datos del Sheet
-    cargarDisponibles();
+    // Inicia la carga de datos y el renderizado
+    loadSelectedState(); // Cargar la selección previa del usuario
+    loadAvailableNumbers(); // Cargar números disponibles del Sheet
   </script>
+
 </body>
 </html>

@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>¡Rifa ArtemenTe: Conecta con tu Energía Creativa!</title>
+  <title>¡Rifa Artemente: Conecta con tu Energía Creativa!</title>
   <meta name="description" content="Rifa de un Kit Creativo-Consciente (camiseta, tula y sesión de yoga). Participa: juega el 7 de noviembre de 2025 con las 2 últimas cifras de la Lotería de Medellín. Publicaremos el número ganador aquí." />
   <style>
     :root{
-      /* Colores inspirados en la paleta de ArtemenTe y energía creativa */
+      /* Colores inspirados en la paleta de Artemente y energía creativa */
       --bg: #f5f0fb; /* Fondo suave y claro */
       --card: #ffffff; /* Fondo de tarjeta blanco */
       --ink: #333333; /* Texto principal oscuro */
-      --brand: #6a0572; /* Morado vibrante de ArtemenTe */
+      --brand: #6a0572; /* Morado vibrante de Artemente */
       --muted: #8e44ad; /* Tono morado más suave para texto secundario */
       --ok: #27ae60; /* Verde para acciones positivas (WhatsApp) */
       --warn: #e74c3c; /* Rojo para acciones de advertencia (restablecer) */
@@ -74,12 +74,12 @@
   <main class="wrap">
     <section class="hero">
       <figure class="card">
-        <img class="hero-img" src="artemente-rifa.jpg" alt="Kit Creativo ArtemenTe en rifa" />
+        <img class="hero-img" src="artemente-rifa.jpg" alt="Kit Creativo Artemente en rifa" />
       </figure>
 
       <div class="grid-card card">
-        <h1 class="title">Gánate este Kit Creativo-Consciente ArtemenTe</h1>
-        <p class="sub">El ganador se lleva: <b>camiseta, tula y sesión de yoga con meditación (antiestrés)</b>. ¡Pocos cupos y mucha suerte! <b>Valor del número: $XXXXX</b></p>
+        <h1 class="title">Gánate este Kit Creativo-Consciente Artemente</h1>
+        <p class="sub">El ganador se llevará: <b>camiseta, tula y sesión de yoga con meditación antiestrés</b>. ¡Pocos cupos disponibles y mucha suerte! <b>Valor del número: $10.000</b></p>
         <div class="legend" aria-hidden="true">
           <span class="dot"></span> Disponible
           <span class="dot sold"></span> Reservado
@@ -97,7 +97,7 @@
   </main>
 
   <footer>
-    <small>Organiza: <b>ArtemenTe</b>. Reglas: gana quien coincida con las 2 últimas cifras del premio mayor de la Lotería de Medellín del 7 de noviembre de 2025.</small>
+    <small>Organiza: <b>Artemente</b>. Reglas: gana quien coincida con las 2 últimas cifras del premio mayor de la Lotería de Medellín del 7 de noviembre de 2025.</small>
   </footer>
 
   <script>
@@ -181,7 +181,7 @@
       let whatsMessage;
       if (seleccionados.length > 0) {
         whatsMessage = encodeURIComponent(
-          `Hola 👋, estoy interesado en reservar los siguientes números para la *Rifa ArtemenTe*: ${seleccionados.join(', ')}. ¿Están disponibles?`
+          `Hola 👋, estoy interesado en reservar los siguientes números para la *Rifa Artemente*: ${seleccionados.join(', ')}. ¿Están disponibles?`
         );
       } else {
         whatsMessage = WHATS_MSG; // Mensaje general si no ha seleccionado nada
@@ -202,7 +202,7 @@
     };
 
     document.getElementById('btnReset').onclick = () => {
-      if(confirm('¿Restablecer el tablero al listado original (disponibles vs. reservados según la hoja de cálculo)?')){
+      if(confirm('¿Desea restablecer el tablero al listado original (disponibles vs. reservados según la hoja de cálculo)?')){
         localStorage.removeItem('rifa-artemente-estado');
         for (const k in state) delete state[k]; // Limpia el estado local
         render(); // Vuelve a renderizar con la data del Sheet

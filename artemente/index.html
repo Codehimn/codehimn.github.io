@@ -3,28 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>¡Súper Rifa del Oso!</title>
-  <meta name="description" content="Rifa de peluche tejido. Participa: juega el 5 de septiembre con las 2 últimas cifras de la Lotería de Medellín. Publicaremos el número ganador aquí durante una semana." />
+  <title>¡Rifa ArtemenTe: Conecta con tu Energía Creativa!</title>
+  <meta name="description" content="Rifa de un Kit Creativo-Consciente (camiseta, tula y sesión de yoga). Participa: juega el 7 de noviembre de 2025 con las 2 últimas cifras de la Lotería de Medellín. Publicaremos el número ganador aquí." />
   <style>
     :root{
-      --bg:#faf7f4; --card:#ffffff; --ink:#2b2b2b; --brand:#d0352b; --muted:#6b6b6b; --ok:#12824c; --warn:#b85b00; --accent:#f2decf;
+      /* Colores inspirados en la paleta de ArtemenTe y energía creativa */
+      --bg: #f5f0fb; /* Fondo suave y claro */
+      --card: #ffffff; /* Fondo de tarjeta blanco */
+      --ink: #333333; /* Texto principal oscuro */
+      --brand: #6a0572; /* Morado vibrante de ArtemenTe */
+      --muted: #8e44ad; /* Tono morado más suave para texto secundario */
+      --ok: #27ae60; /* Verde para acciones positivas (WhatsApp) */
+      --warn: #e74c3c; /* Rojo para acciones de advertencia (restablecer) */
+      --accent: #e0b0ff; /* Morado claro para acentos */
+      --text-highlight: #4a005a; /* Morado oscuro para texto importante */
     }
     *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink)}
-    header{background:linear-gradient(180deg,#fff, #fff0);position:sticky;top:0;z-index:10;border-bottom:1px solid #eee}
+    header{background:linear-gradient(180deg, #ffffff, #ffffff00);position:sticky;top:0;z-index:10;border-bottom:1px solid #eee}
     .wrap{max-width:1000px;margin:auto;padding:20px}
     .hero{display:grid;grid-template-columns:1fr;gap:16px;align-items:center}
     .title{font-size:clamp(28px,5vw,48px);font-weight:800;color:var(--brand);letter-spacing:.4px}
-    .tag{display:inline-block;background:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600}
+    .tag{display:inline-block;background:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;color:var(--text-highlight);}
     .sub{color:var(--muted)}
     .card{background:var(--card);border:1px solid #eee;border-radius:18px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
     .grid-card{padding:16px}
     .info{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-    .info b{color:var(--ink)}
+    .info b{color:var(--text-highlight)}
     .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
     .btn{border:none;cursor:pointer;padding:10px 14px;border-radius:12px;font-weight:700}
     .btn.primary{background:var(--brand);color:#fff}
-    .btn.ghost{background:#0000;border:1px solid #ddd;color:var(--ink)}
+    .btn.ghost{background:#0000;border:1px solid var(--muted);color:var(--ink)}
     .btn.ok{background:var(--ok);color:#fff}
     .btn.warn{background:var(--warn);color:#fff}
 
@@ -33,18 +42,18 @@
     .cell:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.06)}
     .cell small{position:absolute;bottom:6px;right:8px;color:#aaa;font-weight:600;font-size:.75em}
     .cell.sold{color:#9b9b9b;opacity:.9}
-    .cell.sold::after{content:"🐻";position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(20px,4.8vw,30px)}
+    .cell.sold::after{content:"✨";position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(20px,4.8vw,30px)} /* Icono de brillo o estrella */
     .legend{display:flex;gap:14px;align-items:center;color:#666;font-size:14px}
     .dot{width:16px;height:16px;border-radius:6px;border:1px solid #ddd;background:#fff}
     .dot.sold{background:#f4f4f4;display:grid;place-items:center}
-    .dot.sold::after{content:"🐻";font-size:12px}
+    .dot.sold::after{content:"✨";font-size:12px} /* Icono de brillo o estrella para leyenda */
 
     figure{margin:0;border-radius:18px;overflow:hidden}
     img.hero-img{width:100%;height:auto;display:block}
 
     footer{padding:30px 20px;color:#666;text-align:center}
-    .note{font-size:14px;color:#555}
-    .winning-banner{margin-top:10px;padding:10px 14px;border-radius:12px;background:#fff6e7;border:1px dashed #ffc977;color:#7a4900}
+    .note{font-size:14px;color:var(--muted)}
+    .winning-banner{margin-top:10px;padding:10px 14px;border-radius:12px;background:var(--accent);border:1px dashed var(--brand);color:var(--text-highlight)}
 
     @media (min-width:880px){
       .hero{grid-template-columns:1.15fr .85fr}
@@ -56,8 +65,8 @@
   <header>
     <div class="wrap">
       <div class="info">
-        <span class="tag">¡Súper Rifa del Oso!</span>
-        <span class="sub">Juega el <b>5 de septiembre</b> con las <b>2 últimas cifras</b> de la Lotería de Medellín.</span>
+        <span class="tag">¡Conecta con tu Energía Creativa!</span>
+        <span class="sub">Juega el <b>7 de noviembre de 2025</b> con las <b>2 últimas cifras</b> de la Lotería de Medellín.</span>
       </div>
     </div>
   </header>
@@ -65,16 +74,16 @@
   <main class="wrap">
     <section class="hero">
       <figure class="card">
-        <!-- Reemplaza 'oso.jpg' por tu foto (mismo nombre en la carpeta)  -->
-        <img class="hero-img" src="oso.jpg" alt="Peluche tejido en rifa" />
+        <!-- Usa la imagen de ArtemenTe. Asegúrate de que el archivo se llame 'artemente-rifa.png' o ajusta el nombre. -->
+        <img class="hero-img" src="artemente-rifa.png" alt="Kit Creativo ArtemenTe en rifa" />
       </figure>
 
       <div class="grid-card card">
-        <h1 class="title">Gánate este hermoso peluche tejido</h1>
-        <p class="sub">Cómprate un numerito y participa. ¡Poquitos cupos y mucha suerte! <b>Valor: $2.000</b></p>
+        <h1 class="title">Gánate este Kit Creativo-Consciente ArtemenTe</h1>
+        <p class="sub">El ganador se lleva: <b>camiseta, tula y sesión de yoga con meditación (antiestrés)</b>. ¡Pocos cupos y mucha suerte! <b>Valor del número: $XXXXX</b></p>
         <div class="legend" aria-hidden="true">
           <span class="dot"></span> Disponible
-          <span class="dot sold"></span> Vendido
+          <span class="dot sold"></span> Reservado
         </div>
         <div id="board" class="board" role="grid" aria-label="Cuadrícula de la rifa (00 a 99)"></div>
         <div class="cta">
@@ -89,19 +98,18 @@
   </main>
 
   <footer>
-    <small>Organiza: <b>Rifa del Oso</b>. Reglas: gana quien coincida con las 2 últimas cifras del premio mayor de la Lotería de Medellín del 5 de septiembre.</small>
+    <small>Organiza: <b>ArtemenTe</b>. Reglas: gana quien coincida con las 2 últimas cifras del premio mayor de la Lotería de Medellín del 7 de noviembre de 2025.</small>
   </footer>
 
   <script>
     // ================== CONFIGURACIÓN RÁPIDA ==================
     // Reemplaza por tu número de WhatsApp (con indicativo de país):
-    const WHATS_NUMBER = "573114982807";
+    const WHATS_NUMBER = "573127302963"; // Ejemplo, ajusta si es diferente
     // Mensaje predeterminado para WhatsApp
     const WHATS_MSG = encodeURIComponent(
-      "Hola 👋, quiero participar en la *Súper Rifa del Oso*. ¿Qué números tienes disponibles?"
+      "Hola 👋, quiero participar en la *Rifa ArtemenTe: Conecta con tu Energía Creativa*. ¿Qué números tienes disponibles?"
     );
-    // Lista de números DISPONIBLES que nos diste. Formato 00-99.
-    // Todo lo que NO esté en esta lista se marcará como VENDIDO (con osito).
+    // Lista de números DISPONIBLES. Todo lo que NO esté en esta lista se marcará como RESERVADO.
     const disponibles = [
       3,6,7,10,11,12,14,15,21,23,24,26,30,31,33,34,35,36,40,41,42,43,44,46,47,49,
       50,51,53,54,55,56,58,59,60,61,62,64,65,66,68,69,70,71,72,74,75,76,78,79,80,
@@ -112,8 +120,8 @@
     const board = document.getElementById('board');
 
     // Carga/guarda estado local
-    const save = () => localStorage.setItem('rifa-oso-estado', JSON.stringify(state));
-    const saved = localStorage.getItem('rifa-oso-estado');
+    const save = () => localStorage.setItem('rifa-artemente-estado', JSON.stringify(state));
+    const saved = localStorage.getItem('rifa-artemente-estado');
 
     // Estado: map número -> sold(true/false)
     const state = saved ? JSON.parse(saved) : {};
@@ -124,7 +132,7 @@
     function render(){
       board.innerHTML = '';
       numbers.forEach(num => {
-        // Por defecto: vendido, salvo que esté en 'disponibles'
+        // Por defecto: reservado, salvo que esté en 'disponibles'
         const defaultSold = !disponibles.includes(num);
         const sold = state[num] !== undefined ? state[num] : defaultSold;
         const cell = document.createElement('button');
@@ -154,8 +162,8 @@
     };
 
     document.getElementById('btnReset').onclick = () => {
-      if(confirm('¿Restablecer el tablero al listado original (disponibles vs. vendidos)?')){
-        localStorage.removeItem('rifa-oso-estado');
+      if(confirm('¿Restablecer el tablero al listado original (disponibles vs. reservados)?')){
+        localStorage.removeItem('rifa-artemente-estado');
         for (const k in state) delete state[k];
         render();
       }
@@ -168,7 +176,7 @@
       const bn = ganador.padStart(2,'0');
       const winBox = document.getElementById('winning');
       winBox.hidden = false;
-      winBox.textContent = `Número ganador: ${bn}. Este aviso permanecerá visible durante una semana.`;
+      winBox.textContent = `¡Felicidades! El número ganador es: ${bn}. Este aviso permanecerá visible durante una semana.`;
     }
 
     render();
